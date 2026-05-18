@@ -1,22 +1,6 @@
 "use client"
 
-import { useRef } from "react"
-
 export function Sobre() {
-  const card1Ref = useRef<HTMLImageElement>(null)
-
-  const handleEnter = () => {
-    if (card1Ref.current) {
-      card1Ref.current.style.transform = "translateX(calc(50% + 8px))"
-    }
-  }
-
-  const handleLeave = () => {
-    if (card1Ref.current) {
-      card1Ref.current.style.transform = "translateX(0)"
-    }
-  }
-
   return (
     <section
       id="sobre"
@@ -148,62 +132,86 @@ export function Sobre() {
             </div>
           </div>
 
-          {/* Right Column — Slide-right interaction */}
-          <div
-            className="sobre-image-container fade-up delay-4"
-            style={{
-              flex: "1 1 35%",
-              minWidth: 320,
-              position: "relative",
-              width: "100%",
-              height: 420,
-              overflow: "hidden",
-              borderRadius: 16,
-              cursor: "pointer",
-            }}
-            onMouseEnter={handleEnter}
-            onMouseLeave={handleLeave}
-            onTouchStart={handleEnter}
-            onTouchEnd={handleLeave}
-          >
+          {/* Right Column — Slide-left interaction (pure CSS, no clipping) */}
+          <div className="sobre-image-container fade-up delay-4" style={{ cursor: "pointer" }}>
+            <style dangerouslySetInnerHTML={{ __html: `
+              .sobre-image-container {
+                position: relative !important;
+                overflow: visible !important; /* Allow the sliding image to be fully visible side-by-side */
+                height: 420px;
+                flex: 1 1 35%;
+                min-width: 320px;
+                width: 100%;
+              }
+              
+              .sobre-img-bottom {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                object-fit: cover;
+                object-position: center top;
+                border-radius: 16px;
+                z-index: 1;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+                transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+              }
+              
+              .sobre-img-top {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                object-fit: cover;
+                object-position: center top;
+                border-radius: 16px;
+                z-index: 2;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+                transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.6s ease;
+                transform: translateX(0);
+              }
+
+              /* Desktop hover: slide to the left to be completely side-by-side without clipping */
+              @media (min-width: 1024px) {
+                .sobre-image-container:hover .sobre-img-top {
+                  transform: translateX(calc(-100% - 24px)) !important;
+                  box-shadow: -12px 16px 48px rgba(0,0,0,0.22) !important;
+                }
+              }
+
+              /* Tablet hover: slide slightly down & scale to avoid breaking narrow margins */
+              @media (min-width: 768px) and (max-width: 1023px) {
+                .sobre-image-container:hover .sobre-img-top {
+                  transform: translateY(40px) scale(0.95) !important;
+                  box-shadow: 0 16px 40px rgba(0,0,0,0.2) !important;
+                }
+              }
+
+              /* Mobile hover/touch: slide slightly down & scale */
+              @media (max-width: 767px) {
+                .sobre-image-container:hover .sobre-img-top {
+                  transform: translateY(30px) scale(0.95) !important;
+                  box-shadow: 0 12px 32px rgba(0,0,0,0.18) !important;
+                }
+              }
+            `}} />
+
             {/* Card 2 — OAB (bottom, always still) */}
             <img
               src="/69f6bfadc332b.jpg"
               alt="Dra. Graciela Maciel segurando carteira da OAB"
               loading="lazy"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: 420,
-                objectFit: "cover",
-                objectPosition: "center top",
-                borderRadius: 16,
-                zIndex: 1,
-              }}
+              className="sobre-img-bottom"
+              style={{ height: "100%" }}
             />
 
-            {/* Card 1 — Red Blazer (top, slides right on hover) */}
+            {/* Card 1 — Red Blazer (top, slides left on hover) */}
             <img
-              ref={card1Ref}
               src="/69f6bfe280aba.jpg"
               alt="Dra. Graciela Maciel, advogada criminalista no Rio de Janeiro"
               loading="lazy"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: 420,
-                objectFit: "cover",
-                objectPosition: "center top",
-                borderRadius: 16,
-                zIndex: 2,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
-                transition: "transform 0.5s cubic-bezier(0.77, 0, 0.175, 1)",
-                transform: "translateX(0)",
-              }}
+              className="sobre-img-top"
+              style={{ height: "100%" }}
             />
           </div>
         </div>
