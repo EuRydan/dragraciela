@@ -317,15 +317,17 @@
   .delay-4 { transition-delay: 0.32s; }
   .delay-5 { transition-delay: 0.40s; }
 
-  /* Hide scrollbar utility */
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* Depoimentos Card Hover */
+  .depoimentos-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .depoimentos-card:hover {
+    transform: translateY(-4px);
+    border-color: #6B0E08 !important;
+    box-shadow: 0 12px 32px rgba(107, 14, 8, 0.08) !important;
   }
 }
+
 
 /* ─── FOCUS RING (Global) ─────────────────────────────────────────────── */
 :focus-visible {
