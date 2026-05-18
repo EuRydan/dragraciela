@@ -37,7 +37,7 @@ export function Hero() {
         .fundo-animado-graciela {
           position: absolute;
           inset: 0;
-          background: linear-gradient(-45deg, #000000, #3a0000, #6B0E08, #141414, #ffffff);
+          background: linear-gradient(-45deg, #000000, #3a0000, #6B0E08, #141414, #fc6060ff);
           background-size: 400% 400%;
           animation: fundoMovimento 15s ease infinite;
           opacity: 0.7;
