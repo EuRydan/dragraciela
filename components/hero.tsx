@@ -3,7 +3,7 @@
 import React from 'react'
 import { ShaderGradient } from '@shadergradient/react'
 
-export default function Hero() {
+export function Hero() {
   return (
     <section style={{ 
       position: 'relative', 
