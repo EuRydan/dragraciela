@@ -14,6 +14,7 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("#inicio")
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 80)
@@ -32,6 +33,29 @@ export function Header() {
     document.addEventListener("click", handler)
     return () => document.removeEventListener("click", handler)
   }, [menuOpen])
+
+  // Track active section
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`)
+          }
+        })
+      },
+      {
+        rootMargin: "-20% 0px -70% 0px"
+      }
+    )
+
+    navLinks.forEach((link) => {
+      const el = document.querySelector(link.href)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <header
@@ -56,6 +80,10 @@ export function Header() {
         }
         .graciela-mobile-hamburger {
           display: none !important;
+        }
+        @keyframes fadeUpIndicator {
+          from { opacity: 0; transform: translateY(2px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 1023px) {
           .graciela-desktop-nav {
@@ -125,7 +153,9 @@ export function Header() {
           aria-label="Navegação principal"
           className="graciela-desktop-nav"
         >
-          {navLinks.map((l) => (
+          {navLinks.map((l) => {
+            const isActive = activeSection === l.href;
+            return (
             <Link
               key={l.href}
               href={l.href}
@@ -133,25 +163,43 @@ export function Header() {
                 fontFamily: "var(--font-sans)",
                 fontSize: 14,
                 fontWeight: 400,
-                color: scrolled ? "#6B6B6B" : "rgba(255,255,255,0.75)",
+                color: scrolled 
+                  ? (isActive ? "#6B0E08" : "#6B6B6B") 
+                  : (isActive ? "#FFFFFF" : "rgba(255,255,255,0.75)"),
                 textDecoration: "none",
                 transition: "color 0.2s ease",
                 minHeight: 44,
                 display: "inline-flex",
                 alignItems: "center",
+                position: "relative",
               }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = scrolled ? "#0D0D0D" : "#FFFFFF")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.color = scrolled
-                  ? "#6B6B6B"
-                  : "rgba(255,255,255,0.75)")
+                  ? (isActive ? "#6B0E08" : "#6B6B6B")
+                  : (isActive ? "#FFFFFF" : "rgba(255,255,255,0.75)"))
               }
             >
               {l.label}
+              {isActive && (
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 8,
+                    left: 0,
+                    right: 0,
+                    height: 2,
+                    backgroundColor: scrolled ? "#6B0E08" : "#FFFFFF",
+                    borderRadius: 2,
+                    animation: "fadeUpIndicator 0.2s ease forwards",
+                  }}
+                />
+              )}
             </Link>
-          ))}
+            )
+          })}
           <MagneticButton>
             <a
               href="https://wa.me/5521973971095"
@@ -225,7 +273,9 @@ export function Header() {
             width: "100%",
           }}
         >
-          {navLinks.map((l) => (
+          {navLinks.map((l) => {
+            const isActive = activeSection === l.href;
+            return (
             <Link
               key={l.href}
               href={l.href}
@@ -233,10 +283,11 @@ export function Header() {
               style={{
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "space-between",
                 fontFamily: "var(--font-sans)",
                 fontSize: 15,
                 fontWeight: 400,
-                color: "#0D0D0D",
+                color: isActive ? "#6B0E08" : "#0D0D0D",
                 textDecoration: "none",
                 minHeight: 48,
                 borderBottom: "1px solid #F0F0F0",
@@ -244,8 +295,18 @@ export function Header() {
               }}
             >
               {l.label}
+              {isActive && (
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    backgroundColor: "#6B0E08",
+                    borderRadius: "50%",
+                  }}
+                />
+              )}
             </Link>
-          ))}
+          )})}
           <a
             href="https://wa.me/5521973971095"
             target="_blank"

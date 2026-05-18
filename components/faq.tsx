@@ -81,7 +81,7 @@ function FAQItem({ item, index, isOpen, onToggle }: {
             flexShrink: 0,
             width: 28,
             height: 28,
-            borderRadius: 4,
+            borderRadius: 0,
             border: "1.5px solid #6B0E08",
             display: "flex",
             alignItems: "center",
