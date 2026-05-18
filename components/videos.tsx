@@ -1,17 +1,49 @@
+"use client"
+
+import { useEffect } from "react"
+
 const videos = [
   {
-    src: "https://www.youtube.com/embed/NTBkkZvksiY",
+    src: "https://www.youtube.com/embed/NTBkkZvksiY?enablejsapi=1",
     title: "Pediram para você ir à delegacia apenas para conversar?",
     desc: "Saiba o que fazer e como se proteger nessa situação.",
   },
   {
-    src: "https://www.youtube.com/embed/bpqq2GIl1zk",
+    src: "https://www.youtube.com/embed/bpqq2GIl1zk?enablejsapi=1",
     title: "Três sinais de que você precisa de um advogado criminalista hoje",
     desc: "Não espere o problema se agravar. Conheça os alertas.",
   },
 ]
 
 export function Videos() {
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      try {
+        const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+        
+        // When any YouTube video starts playing (state 1 represents playing)
+        if (data && data.event === 'onStateChange' && data.info === 1) {
+          const iframes = document.querySelectorAll('iframe');
+          iframes.forEach((iframe) => {
+            if (iframe.contentWindow && iframe.contentWindow !== event.source) {
+              iframe.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func: 'pauseVideo', args: '' }),
+                '*'
+              );
+            }
+          });
+        }
+      } catch (err) {
+        // Ignore parsing errors for non-YouTube messages
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   return (
     <section
       id="conteudo"
