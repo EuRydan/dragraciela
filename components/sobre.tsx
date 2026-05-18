@@ -177,17 +177,10 @@ export function Sobre() {
                 transform: translateX(0);
               }
 
-              /* Desktop hover: slide apart side-by-side to prevent overflow and look stunning */
+              /* Desktop hover: ONLY top image slides right. Bottom image stays perfectly static so it never covers text. */
               @media (min-width: 1024px) {
-                .sobre-flex:hover .sobre-text-col {
-                  transform: translateX(-16px) !important;
-                }
-                .sobre-image-container:hover .sobre-img-bottom {
-                  transform: translateX(calc(-50% - 12px)) scale(0.98) !important;
-                  box-shadow: -8px 12px 32px rgba(0,0,0,0.18) !important;
-                }
                 .sobre-image-container:hover .sobre-img-top {
-                  transform: translateX(calc(50% + 12px)) scale(1.02) !important;
+                  transform: translateX(calc(100% + 24px)) !important;
                   box-shadow: 12px 16px 40px rgba(0,0,0,0.25) !important;
                 }
               }
