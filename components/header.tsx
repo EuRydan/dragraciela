@@ -119,21 +119,6 @@ export function Header() {
             minHeight: 44,
           }}
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={scrolled ? "#6B0E08" : "#FFFFFF"}
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            style={{ transition: "stroke 0.3s ease" }}
-          >
-            <path d="M12 3L3 8v8l9 5 9-5V8L12 3z" />
-            <path d="M12 3v14M3 8l9 5 9-5" />
-          </svg>
           <span
             style={{
               fontFamily: "var(--font-serif)",
