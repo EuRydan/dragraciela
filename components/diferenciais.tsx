@@ -136,35 +136,35 @@ export function Diferenciais() {
           </h2>
         </div>
 
-        {/* Stat counters — always 3 cols */}
+        {/* Cards grid — 3 cols desktop, 1 col mobile */}
         <div
-          ref={statsRef}
-          className="fade-up delay-2"
+          className="diferenciais-cards fade-up delay-2"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 32,
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 24,
             borderBottom: "1px solid #EBEBEB",
             paddingBottom: 48,
             marginBottom: 48,
           }}
         >
-          {stats.map((stat) => (
-            <AnimatedStat key={stat.label} stat={stat} inView={statsInView} />
+          {cards.map((card, i) => (
+            <DifCard key={card.title} card={card} index={i} />
           ))}
         </div>
 
-        {/* Cards grid — 3 cols desktop, 1 col mobile */}
+        {/* Stat counters — always 3 cols */}
         <div
-          className="diferenciais-cards"
+          ref={statsRef}
+          className="fade-up delay-3"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 24,
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 32,
           }}
         >
-          {cards.map((card, i) => (
-            <DifCard key={card.title} card={card} index={i} />
+          {stats.map((stat) => (
+            <AnimatedStat key={stat.label} stat={stat} inView={statsInView} />
           ))}
         </div>
       </div>
