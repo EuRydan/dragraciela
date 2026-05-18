@@ -213,7 +213,7 @@ export function Depoimentos() {
       <div className="section-inner">
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 16 }}>
-          <h2 className="section-title fade-up delay-1">O que dizem os clientes.</h2>
+          <h2 className="section-title fade-up delay-1">Avaliações de Clientes.</h2>
         </div>
 
         {/* Star badge */}

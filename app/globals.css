@@ -376,6 +376,22 @@
   cursor: unset !important;
 }
 
+/* ─── CTA CONTAINER & MAP WRAPPER ─── */
+.cta-container {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  width: 100%;
+}
+
+.cta-map-wrapper {
+  width: 100%;
+  height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+
 /* ══════════════════════════════════════════════════════════════════════
    RESPONSIVE — TABLET (768px – 1024px)
    ══════════════════════════════════════════════════════════════════════ */
@@ -583,6 +599,10 @@
   }
 
   /* ── CTA FINAL ── */
+  .cta-layout {
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
   .cta-headline {
     font-size: 26px !important;
   }
@@ -590,13 +610,9 @@
     width: 100% !important;
     justify-content: center !important;
   }
-  .cta-pills {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  .cta-pills span {
-    justify-content: center !important;
-    text-align: center !important;
+  .cta-map-container iframe,
+  .cta-map-wrapper {
+    height: 280px !important;
   }
 
   /* ── FOOTER ── */
