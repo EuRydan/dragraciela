@@ -39,29 +39,23 @@ function AreaRow({ area, index }: { area: typeof areas[0]; index: number }) {
         display: "flex",
         alignItems: "center",
         gap: 16,
-        padding: "20px 0 20px 12px",
+        padding: "20px 16px",
         position: "relative",
         borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
-        borderLeft: "3px solid transparent",
         cursor: "default",
-        transition: "border-color 0.25s ease",
-        borderLeftColor: hovered ? "#FFFFFF" : "transparent",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Animated bottom line */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          height: 2,
-          background: "#FFFFFF",
-          width: hovered ? "100%" : "0%",
-          transition: "width 0.3s ease-out",
-        }}
-      />
+      {/* Animated Borders */}
+      {/* Top line */}
+      <div style={{ position: "absolute", top: 0, left: 0, height: 2, background: "#FFFFFF", width: hovered ? "100%" : "0%", transition: "width 0.3s ease-out" }} />
+      {/* Bottom line */}
+      <div style={{ position: "absolute", bottom: 0, right: 0, height: 2, background: "#FFFFFF", width: hovered ? "100%" : "0%", transition: "width 0.3s ease-out" }} />
+      {/* Left line */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, width: 2, background: "#FFFFFF", height: hovered ? "100%" : "0%", transition: "height 0.3s ease-out" }} />
+      {/* Right line */}
+      <div style={{ position: "absolute", top: 0, right: 0, width: 2, background: "#FFFFFF", height: hovered ? "100%" : "0%", transition: "height 0.3s ease-out" }} />
 
       {/* Number */}
       <span
