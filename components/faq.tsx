@@ -154,7 +154,7 @@ export function FAQ() {
           }}
         >
           <h2 className="section-title fade-up delay-1">
-            Dúvidas frequentes em casos criminais.
+            Dúvidas frequentes em<br /> casos criminais.
           </h2>
           <div className="title-divider fade-up delay-2" style={{ marginBottom: 12 }} />
           <p

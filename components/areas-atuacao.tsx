@@ -141,7 +141,8 @@ export function AreasAtuacao() {
               maxWidth: 540,
             }}
           >
-            Cada caso é único. Atuamos com precisão em todas as frentes do direito criminal.
+            Cada caso é único. Atuamos com precisão em todas as frentes<br />
+            do direito criminal.
           </p>
         </div>
 

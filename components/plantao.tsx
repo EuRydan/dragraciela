@@ -50,7 +50,8 @@ export function Plantao() {
             marginBottom: 24,
           }}
         >
-          Plantão 24 horas para casos urgentes.
+          Plantão 24 horas para <br />
+          casos urgentes.
         </h2>
 
         {/* Body */}
