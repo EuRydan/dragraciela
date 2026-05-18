@@ -19,7 +19,6 @@ export function Hero() {
       style={{
         position: "relative",
         minHeight: 640,
-        height: "100vh",
         display: "flex",
         alignItems: "center",
         paddingTop: 80,
