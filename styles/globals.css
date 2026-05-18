@@ -124,6 +124,7 @@
   }
 }
 
-*, *::before, *::after, body, a, button, input, select, textarea, [role="button"] {
-  cursor: unset !important;
+a, button, [role="button"], select, label {
+  cursor: pointer;
 }
+
