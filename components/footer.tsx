@@ -97,7 +97,8 @@ export function Footer() {
               margin: 0,
             }}
           >
-            Av. das Américas, 19005 — Recreio dos Bandeirantes, RJ
+            Av. das Américas, 19005 <br />
+            Recreio dos Bandeirantes, RJ
             <br />
             (21) 97397-1095
           </p>
@@ -131,7 +132,7 @@ export function Footer() {
                     transition: "color 0.2s ease, opacity 0.2s ease",
                     display: "inline-flex",
                     alignItems: "center",
-                    minHeight: 44,
+                    minHeight: 24,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "#F9C5C0"
@@ -159,7 +160,7 @@ export function Footer() {
               textTransform: "uppercase",
               letterSpacing: "0.14em",
               color: "rgba(255,255,255,0.4)",
-              marginBottom: 16,
+              marginBottom: 14,
             }}
           >
             Redes Sociais
@@ -181,7 +182,7 @@ export function Footer() {
                     color: "rgba(255,255,255,0.7)",
                     textDecoration: "none",
                     transition: "color 0.2s ease",
-                    minHeight: 44,
+                    minHeight: 24,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "#F9C5C0"
@@ -224,7 +225,7 @@ export function Footer() {
             margin: 0,
           }}
         >
-          © 2025 Dra. Graciela Criminalista. Todos os direitos reservados.
+          © 2026 Dra. Graciela Criminalista. Todos os direitos reservados.
         </p>
         <p
           style={{
