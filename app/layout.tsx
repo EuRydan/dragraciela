@@ -1,18 +1,19 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Noto_Serif, Andika } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import './globals.css'
 
-const playfair = Playfair_Display({ 
+const notoserif = Noto_Serif({ 
   subsets: ["latin"],
-  variable: '--font-playfair',
+  variable: '--font-notoserif',
   display: 'swap',
 })
 
-const inter = Inter({ 
+const andika = Andika({ 
+  weight: ["400", "700"], // Andika typically has regular and bold
   subsets: ["latin"],
-  variable: '--font-inter',
+  variable: '--font-andika',
   display: 'swap',
 })
 
@@ -71,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${playfair.variable} ${inter.variable} bg-background scroll-smooth`}>
+    <html lang="pt-BR" className={`${notoserif.variable} ${andika.variable} bg-background scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"

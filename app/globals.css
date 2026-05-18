@@ -45,8 +45,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-sans: var(--font-andika), 'Andika', system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-notoserif), 'Noto Serif', Georgia, serif;
 
   /* Colors */
   --color-brand: var(--brand);

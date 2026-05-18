@@ -181,8 +181,7 @@ function DifCard({ card, index }: { card: typeof cards[0]; index: number }) {
       style={{
         position: "relative",
         overflow: "hidden",
-        borderLeft: `3px solid ${hovered ? "#6B0E08" : "transparent"}`,
-        transition: "border-color 0.3s ease-out, box-shadow 0.3s ease-out, transform 0.3s ease-out",
+        transition: "box-shadow 0.3s ease-out, transform 0.3s ease-out",
         cursor: "default",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
         boxShadow: hovered ? "0 8px 32px rgba(0,0,0,0.10)" : "0 2px 16px rgba(0,0,0,0.06)",
@@ -190,16 +189,52 @@ function DifCard({ card, index }: { card: typeof cards[0]; index: number }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Animated bottom line */}
+      {/* Top Border */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: 3,
+          background: "var(--brand)",
+          width: hovered ? "100%" : "0%",
+          transition: "width 0.4s ease-out",
+        }}
+      />
+      {/* Right Border */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: 3,
+          background: "var(--brand)",
+          height: hovered ? "100%" : "0%",
+          transition: "height 0.4s ease-out",
+        }}
+      />
+      {/* Bottom Border */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          height: 3,
+          background: "var(--brand)",
+          width: hovered ? "100%" : "0%",
+          transition: "width 0.4s ease-out",
+        }}
+      />
+      {/* Left Border */}
       <div
         style={{
           position: "absolute",
           bottom: 0,
           left: 0,
-          height: 2,
-          background: "#6B0E08",
-          width: hovered ? "100%" : "0%",
-          transition: "width 0.3s ease-out",
+          width: 3,
+          background: "var(--brand)",
+          height: hovered ? "100%" : "0%",
+          transition: "height 0.4s ease-out",
         }}
       />
 
