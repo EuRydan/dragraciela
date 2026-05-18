@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Noto_Serif, Andika } from 'next/font/google'
+import { Noto_Serif, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import './globals.css'
@@ -10,10 +10,9 @@ const notoserif = Noto_Serif({
   display: 'swap',
 })
 
-const andika = Andika({ 
-  weight: ["400", "700"], // Andika typically has regular and bold
+const inter = Inter({ 
   subsets: ["latin"],
-  variable: '--font-andika',
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -72,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${notoserif.variable} ${andika.variable} bg-background scroll-smooth`}>
+    <html lang="pt-BR" className={`${notoserif.variable} ${inter.variable} bg-background scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
