@@ -1,14 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import dynamic from "next/dynamic"
-
-// Esse é o feitiço supremo: impede que o componente 3D quebre a página inteira
-const ShaderGradientComponent = dynamic(
-  () => import("@shadergradient/react").then((mod) => mod.ShaderGradient),
-  { ssr: false, loading: () => <div style={{ backgroundColor: "#000", width: "100%", height: "100%" }} /> }
-)
 
 export function Hero() {
   const [loaded, setLoaded] = useState(false)
@@ -34,56 +27,26 @@ export function Hero() {
         backgroundColor: "#000000"
       }}
     >
-      {/* CAMADA DA ANIMAÇÃO SHADER 3D ISOLADA */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
-        }}
-      >
-        <ShaderGradientComponent  
-          animate="on"  
-          axesHelper="off"  
-          brightness={1.5}  
-          cAzimuthAngle={170}  
-          cDistance={3.5}  
-          cPolarAngle={70}  
-          cameraZoom={1}  
-          color1="#000000"  
-          color2="#6B0E08"  
-          color3="#ffffff"  
-          destination="onCanvas"  
-          embedMode="off"  
-          envPreset="city"  
-          format="gif"  
-          fov={30}  
-          frameRate={10}  
-          gizmoHelper="hide"  
-          grain="off"  
-          lightType="3d"  
-          pixelDensity={0.8}  
-          positionX={0}  
-          positionY={0.9}  
-          positionZ={-0.3}  
-          range="disabled"  
-          rangeEnd={40}  
-          rangeStart={0}  
-          reflection={0.1}  
-          rotationX={45}  
-          rotationY={0}  
-          rotationZ={0}  
-          shader="defaults"  
-          type="waterPlane"  
-          uAmplitude={0}  
-          uDensity={0.4}  
-          uFrequency={0}  
-          uSpeed={0.1}  
-          uStrength={4.7}  
-          uTime={0}  
-          wireframe={false}
-        />
-      </div>
+      {/* ESTILO DO GRADIENTE ANIMADO EM CSS PURO (Sem pacotes que quebram) */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes fundoMovimento {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .fundo-animado-graciela {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(-45deg, #000000, #3a0000, #6B0E08, #141414, #ffffff);
+          background-size: 400% 400%;
+          animation: fundoMovimento 15s ease infinite;
+          opacity: 0.7;
+          z-index: 0;
+        }
+      `}} />
+
+      {/* Camada do fundo */}
+      <div className="fundo-animado-graciela" />
 
       {/* CONTEÚDO DE TEXTO DA DRA GRACIELA */}
       <div className="section-inner" style={{ width: "100%", position: "relative", zIndex: 1 }}>
