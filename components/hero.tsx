@@ -124,13 +124,14 @@ export function Hero() {
 
           {/* LADO DIREITO: O ESPAÇO PARA A SUA FOTO BONITA 🍌 */}
           <div className="flex justify-center md:justify-end" style={{ flex: "1 1 50%", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease-out 0.5s" }}>
+            <div className="flex justify-center md:justify-end" style={{ flex: "1 1 50%", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease-out 0.5s" }}>
             <Image
-              src="/dra-graciela-hero.png"
+              src="/dra-graciela-hero.png" 
               alt="Dra. Graciela Maciel"
-              width={520} // Ajuste o tamanho conforme sua foto (em pixels)
-              height={520} // Ajuste o tamanho conforme sua foto (em pixels)
-              className="object-contain" // Mantém a proporção da foto
-              priority // Carrega esta imagem primeiro para não piscar
+              width={520} // Ajuste conforme sua foto, se necessário
+              height={520} // Ajuste conforme sua foto, se necessário
+              className="object-contain object-bottom h-full" // object-bottom alinha com a borda inferior
+              priority
             />
           </div>
 
