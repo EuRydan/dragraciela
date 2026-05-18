@@ -154,6 +154,7 @@ export function Sobre() {
                 top: 0;
                 left: 0;
                 width: 100%;
+                height: 100% !important;
                 object-fit: cover;
                 object-position: center top;
                 border-radius: 16px;
@@ -168,6 +169,7 @@ export function Sobre() {
                 top: 0;
                 left: 0;
                 width: 100%;
+                height: 100% !important;
                 object-fit: cover;
                 object-position: center top;
                 border-radius: 16px;
@@ -193,10 +195,20 @@ export function Sobre() {
                 }
               }
 
-              /* Mobile hover/touch: slide slightly down & scale */
+              /* Mobile viewport adjustments to guarantee absolute responsiveness and zero bleeding */
               @media (max-width: 767px) {
+                .sobre-image-container {
+                  height: 320px !important;
+                  min-width: 0 !important;
+                  width: 100% !important;
+                  overflow: hidden !important; /* Bulletproof containment on mobile screen sizes */
+                  border-radius: 16px;
+                }
+                .sobre-img-bottom, .sobre-img-top {
+                  height: 320px !important;
+                }
                 .sobre-image-container:hover .sobre-img-top {
-                  transform: translateY(30px) scale(0.95) !important;
+                  transform: scale(0.98) !important;
                   box-shadow: 0 12px 32px rgba(0,0,0,0.18) !important;
                 }
               }

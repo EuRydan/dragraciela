@@ -64,8 +64,9 @@ export function Footer() {
           maxWidth: 1200,
           margin: "0 auto",
           padding: "72px 24px 0",
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
           gap: 48,
         }}
       >
@@ -151,7 +152,7 @@ export function Footer() {
         </nav>
 
         {/* Column 3 — Redes Sociais */}
-        <div>
+        <div className="footer-social-column">
           <p
             style={{
               fontFamily: "var(--font-sans)",

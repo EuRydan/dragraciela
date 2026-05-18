@@ -665,7 +665,8 @@
 
   /* ── FOOTER ── */
   .footer-grid {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 0 !important;
     padding-top: 48px !important;
   }
@@ -693,5 +694,18 @@
   /* General touch targets */
   a, button {
     min-height: 44px;
+  }
+}
+
+/* Footer Desktop Spacing & Alignment */
+@media (min-width: 768px) {
+  .footer-social-column {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+  .footer-social-column ul {
+    align-items: flex-end !important;
   }
 }
