@@ -4,20 +4,10 @@ const CTAMap = dynamic(() => import("./cta-map"), { ssr: false })
 
 export function CTAFinal() {
   return (
-    <section
-      id="cta"
-      style={{ background: "#6B0E08", paddingTop: 96, paddingBottom: 96 }}
-    >
-      <div 
-        className="cta-container cta-layout" 
-        style={{
-          display: "flex",
-          gap: 64,
-          alignItems: "center"
-        }}
-      >
+    <section id="cta" className="cta-section">
+      <div className="cta-container">
         {/* Left Column */}
-        <div style={{ flex: 1, textAlign: "left" }}>
+        <div className="cta-text-wrapper">
           <span 
             className="fade-up"
             style={{
@@ -89,11 +79,12 @@ export function CTAFinal() {
         </div>
 
         {/* Right Column - Map */}
-        <div className="fade-up delay-4 cta-map-container" style={{ flex: 1, width: "100%" }}>
+        <div className="cta-map-column fade-up delay-4">
           <CTAMap />
         </div>
       </div>
     </section>
   )
 }
+
 
