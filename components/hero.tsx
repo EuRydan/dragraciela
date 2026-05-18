@@ -2,16 +2,18 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { ShaderGradient } from '@shadergradient/react'
+import dynamic from "next/dynamic"
+
+// Esse é o feitiço supremo: impede que o componente 3D quebre a página inteira
+const ShaderGradientComponent = dynamic(
+  () => import("@shadergradient/react").then((mod) => mod.ShaderGradient),
+  { ssr: false, loading: () => <div style={{ backgroundColor: "#000", width: "100%", height: "100%" }} /> }
+)
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false)
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    // Garante que o ShaderGradient só monte no navegador
-    setMounted(true)
-    // Ativa as animações de fade-in dos textos
     requestAnimationFrame(() => setLoaded(true))
   }, [])
 
@@ -24,7 +26,7 @@ export function Hero() {
       style={{
         position: "relative",
         minHeight: 640,
-        height: "100vh", // Ocupa a tela inteira se quiser, ou mantenha minHeight
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         paddingTop: 80,
@@ -32,7 +34,7 @@ export function Hero() {
         backgroundColor: "#000000"
       }}
     >
-      {/* CAMADA DA ANIMAÇÃO SHADER 3D (Substituiu a imagem antiga) */}
+      {/* CAMADA DA ANIMAÇÃO SHADER 3D ISOLADA */}
       <div
         style={{
           position: "absolute",
@@ -40,72 +42,52 @@ export function Hero() {
           zIndex: 0,
         }}
       >
-        {mounted && (
-          <ShaderGradient  
-            animate="on"  
-            axesHelper="off"  
-            brightness={1.5}  
-            cAzimuthAngle={170}  
-            cDistance={3.5}  
-            cPolarAngle={70}  
-            cameraZoom={1}  
-            color1="#000000"  
-            color2="#6B0E08"  
-            color3="#ffffff"  
-            destination="onCanvas"  
-            embedMode="off"  
-            envPreset="city"  
-            format="gif"  
-            fov={30}  
-            frameRate={10}  
-            gizmoHelper="hide"  
-            grain="off"  
-            lightType="3d"  
-            pixelDensity={0.8}  
-            positionX={0}  
-            positionY={0.9}  
-            positionZ={-0.3}  
-            range="disabled"  
-            rangeEnd={40}  
-            rangeStart={0}  
-            reflection={0.1}  
-            rotationX={45}  
-            rotationY={0}  
-            rotationZ={0}  
-            shader="defaults"  
-            type="waterPlane"  
-            uAmplitude={0}  
-            uDensity={0.4}  
-            uFrequency={0}  
-            uSpeed={0.1}  
-            uStrength={4.7}  
-            uTime={0}  
-            wireframe={false}
-          />
-        )}
+        <ShaderGradientComponent  
+          animate="on"  
+          axesHelper="off"  
+          brightness={1.5}  
+          cAzimuthAngle={170}  
+          cDistance={3.5}  
+          cPolarAngle={70}  
+          cameraZoom={1}  
+          color1="#000000"  
+          color2="#6B0E08"  
+          color3="#ffffff"  
+          destination="onCanvas"  
+          embedMode="off"  
+          envPreset="city"  
+          format="gif"  
+          fov={30}  
+          frameRate={10}  
+          gizmoHelper="hide"  
+          grain="off"  
+          lightType="3d"  
+          pixelDensity={0.8}  
+          positionX={0}  
+          positionY={0.9}  
+          positionZ={-0.3}  
+          range="disabled"  
+          rangeEnd={40}  
+          rangeStart={0}  
+          reflection={0.1}  
+          rotationX={45}  
+          rotationY={0}  
+          rotationZ={0}  
+          shader="defaults"  
+          type="waterPlane"  
+          uAmplitude={0}  
+          uDensity={0.4}  
+          uFrequency={0}  
+          uSpeed={0.1}  
+          uStrength={4.7}  
+          uTime={0}  
+          wireframe={false}
+        />
       </div>
 
-      {/* CONTEÚDO DE TEXTO (Mantido idêntico ao original, flutuando na frente) */}
+      {/* CONTEÚDO DE TEXTO DA DRA GRACIELA */}
       <div className="section-inner" style={{ width: "100%", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 640 }}>
-          {/* Eyebrow */}
-          <span
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: 13,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "#FFFFFF",
-              opacity: loaded ? 0.85 : 0,
-              display: "block",
-              transform: loaded ? "translateY(0)" : "translateY(16px)",
-              transition: "opacity 0.6s ease-out 0.1s, transform 0.6s ease-out 0.1s",
-            }}
-          >
-          </span>
-
-          {/* Headline */}
           <h1
             className="hero-headline"
             style={{
@@ -125,7 +107,6 @@ export function Hero() {
             Advocacia Criminal com Ética, Estratégia e Responsabilidade.
           </h1>
 
-          {/* Body */}
           <p
             className="hero-body"
             style={{
@@ -144,7 +125,6 @@ export function Hero() {
             Defesa jurídica especializada de alta complexidade. Protegemos seus direitos fundamentais com dedicação integral, sigilo absoluto e soluções estratégicas personalizadas.
           </p>
 
-          {/* CTAs */}
           <div
             className="hero-ctas"
             style={{
