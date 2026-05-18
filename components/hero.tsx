@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import Image from "next/image" // Importante para otimizar sua imagem no Next.js
+import Image from "next/image"
 
 export function Hero() {
   const [loaded, setLoaded] = useState(false)
@@ -20,16 +20,14 @@ export function Hero() {
       style={{
         position: "relative",
         minHeight: 640,
-        // height: "100vh", // Remova se já não estiver usando, conforme o ajuste anterior
         display: "flex",
         alignItems: "center",
         paddingTop: 80,
-        paddingBottom: 40, // Adicionei um paddingzinho inferior
         overflow: "hidden",
         backgroundColor: "#000000"
       }}
     >
-      {/* ESTILO DO GRADIENTE ANIMADO EM CSS PURO (Mantido) */}
+      {/* ESTILO DO GRADIENTE ANIMADO EM CSS PURO */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fundoMovimento {
           0% { background-position: 0% 50%; }
@@ -47,14 +45,14 @@ export function Hero() {
         }
       `}} />
 
-      {/* Camada do fundo (Mantido) */}
+      {/* Camada do fundo */}
       <div className="fundo-animado-graciela" />
 
       {/* CONTEÚDO PRINCIPAL EM FLEX BOX */}
       <div className="section-inner container mx-auto px-4" style={{ position: "relative", zIndex: 1, width: "100%" }}>
-        <div className="flex flex-col md:flex-row items-center gap-10">
+        <div className="flex flex-col md:flex-row items-stretch gap-10" style={{ display: "flex", alignItems: "center" }}>
           
-          {/* LADO ESQUERDO: SEUS TEXTOS E BOTÕES (MANTIDOS E AJUSTADOS) */}
+          {/* LADO ESQUERDO: SEUS TEXTOS E BOTÕES */}
           <div style={{ maxWidth: 640, flex: "1 1 50%" }}>
             <h1
               className="hero-headline"
@@ -122,15 +120,14 @@ export function Hero() {
             </div>
           </div>
 
-          {/* LADO DIREITO: O ESPAÇO PARA A SUA FOTO BONITA 🍌 */}
-          <div className="flex justify-center md:justify-end" style={{ flex: "1 1 50%", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease-out 0.5s" }}>
-            <div className="flex justify-center md:justify-end" style={{ flex: "1 1 50%", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease-out 0.5s" }}>
+          {/* LADO DIREITO: FOTO ALINHADA NA BASE DA CAIXA */}
+          <div className="flex justify-center md:justify-end" style={{ flex: "1 1 50%", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease-out 0.5s", alignSelf: "flex-end", marginTop: "auto" }}>
             <Image
-              src="/dra-graciela-hero.png" 
+              src="/dra-graciela-hero.png"
               alt="Dra. Graciela Maciel"
-              width={520} // Ajuste conforme sua foto, se necessário
-              height={520} // Ajuste conforme sua foto, se necessário
-              className="object-contain object-bottom h-full" // object-bottom alinha com a borda inferior
+              width={520}
+              height={520}
+              style={{ display: "block", width: "100%", height: "auto", maxHeight: "560px", objectFit: "contain", verticalAlign: "bottom" }}
               priority
             />
           </div>
