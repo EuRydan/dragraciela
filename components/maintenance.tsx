@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Scale, MessageSquare, Mail, AlertTriangle } from "lucide-react"
+import { Lock, AlertTriangle } from "lucide-react"
 
 export function Maintenance() {
   const [loaded, setLoaded] = useState(false)
@@ -23,7 +23,7 @@ export function Maintenance() {
   return (
     <div
       role="alert"
-      aria-label="Site em manutenção - Fechado por tempo indeterminado"
+      aria-label="Sistema indisponível - Fechado por tempo indeterminado"
       style={{
         position: "fixed",
         inset: 0,
@@ -87,7 +87,7 @@ export function Maintenance() {
           border-radius: 0px; /* STRICT SHARP DESIGN SYSTEM */
           max-width: 520px;
           width: 100%;
-          padding: 48px 40px;
+          padding: 56px 40px;
           text-align: center;
           position: relative;
           z-index: 10;
@@ -114,7 +114,7 @@ export function Maintenance() {
           font-family: var(--font-serif), Georgia, serif;
           font-size: clamp(24px, 5vw, 34px);
           font-weight: 400;
-          line-height: 1.2;
+          line-height: 1.25;
           letter-spacing: -0.02em;
           color: #FFFFFF;
           margin-bottom: 20px;
@@ -132,93 +132,18 @@ export function Maintenance() {
           font-size: 15px;
           line-height: 1.7;
           color: rgba(255, 255, 255, 0.8);
-          margin-bottom: 36px;
-        }
-
-        .contact-section-sharp {
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          padding-top: 32px;
-          text-align: left;
-        }
-
-        .contact-title-sharp {
-          font-family: var(--font-sans), sans-serif;
-          font-size: 12px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: rgba(255, 255, 255, 0.5);
-          margin-bottom: 20px;
-          text-align: center;
-        }
-
-        .btn-sharp-primary {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          background: #6B0E08;
-          color: #FFFFFF;
-          font-family: var(--font-sans), sans-serif;
-          font-size: 14px;
-          font-weight: 500;
-          padding: 15px 28px;
-          border-radius: 0px; /* STRICT SHARP DESIGN SYSTEM */
-          text-decoration: none;
-          border: none;
-          box-shadow: 0 2px 8px rgba(107, 14, 8, 0.25);
-          transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-          margin-bottom: 12px;
-          cursor: pointer;
-          min-height: 44px;
-        }
-
-        .btn-sharp-primary:hover {
-          background: #4A0906; /* brand-press */
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(107, 14, 8, 0.35);
-        }
-
-        .btn-sharp-primary:active {
-          transform: translateY(0);
-        }
-
-        .btn-sharp-secondary {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          background: transparent;
-          color: #FFFFFF;
-          font-family: var(--font-sans), sans-serif;
-          font-size: 14px;
-          font-weight: 500;
-          padding: 14px 28px;
-          border-radius: 0px; /* STRICT SHARP DESIGN SYSTEM */
-          text-decoration: none;
-          border: 1.5px solid rgba(255, 255, 255, 0.4);
-          transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-          cursor: pointer;
-          min-height: 44px;
-        }
-
-        .btn-sharp-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: #FFFFFF;
-          transform: translateY(-1px);
-        }
-
-        .btn-sharp-secondary:active {
-          transform: translateY(0);
+          margin-bottom: 8px;
         }
 
         .maintenance-footer-sharp {
-          margin-top: 40px;
-          font-size: 12px;
-          color: rgba(255, 255, 255, 0.4);
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          margin-top: 36px;
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.35);
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
           padding-top: 24px;
           font-family: var(--font-sans), sans-serif;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
       `}} />
 
@@ -245,56 +170,30 @@ export function Maintenance() {
               alignItems: "center",
               justifyContent: "center",
               border: "1.5px solid #6B0E08",
-              borderRadius: "0px", /* SHARP DESIGN */
+              borderRadius: "0px",
             }}
           >
-            <Scale size={24} color="#FFFFFF" strokeWidth={1.5} />
+            <Lock size={22} color="#FFFFFF" strokeWidth={1.5} />
           </div>
         </div>
 
         <div className="badge-comunicado-sharp">
           <AlertTriangle size={12} strokeWidth={2.5} />
-          Comunicado Oficial
+          Comunicado do Sistema
         </div>
 
         <h1 className="maintenance-title-sharp">
-          Portal Suspenso
+          Acesso Indisponível
         </h1>
         
         <div className="title-divider-sharp" />
 
         <p className="maintenance-message-sharp">
-          Informamos que o site da Dra. Graciela Maciel encontra-se fechado por tempo indeterminado.
+          Informamos que este endereço eletrônico encontra-se temporariamente desativado e fechado por tempo indeterminado.
         </p>
 
-        <div className="contact-section-sharp">
-          <h2 className="contact-title-sharp">
-            Urgências &amp; Clientes Ativos
-          </h2>
-          
-          <a
-            href="https://wa.me/5521973971095"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-sharp-primary"
-            aria-label="Falar pelo WhatsApp com a Dra. Graciela"
-          >
-            <MessageSquare size={16} strokeWidth={2} />
-            Atendimento de Emergência
-          </a>
-
-          <a
-            href="mailto:contato@gracielacriminalista.com.br"
-            className="btn-sharp-secondary"
-            aria-label="Enviar e-mail para a Dra. Graciela"
-          >
-            <Mail size={16} strokeWidth={2} />
-            Enviar E-mail
-          </a>
-        </div>
-
         <footer className="maintenance-footer-sharp">
-          Dra. Graciela Maciel &bull; Advocacia Criminal &bull; OAB/RJ 517.632
+          Status: Sistema Off-line
         </footer>
       </main>
     </div>
