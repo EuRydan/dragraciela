@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main style={{ position: "relative", overflow: "visible" }}>
         <Hero />
         <Diferenciais />
         <Sobre />

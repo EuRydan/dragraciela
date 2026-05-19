@@ -181,75 +181,46 @@ function DifCard({ card, index }: { card: typeof cards[0]; index: number }) {
       style={{
         position: "relative",
         overflow: "hidden",
-        transition: "box-shadow 0.3s ease-out, transform 0.3s ease-out",
+        backgroundColor: "#FFFFFF",
+        borderRadius: 0,
+        border: "1px solid #EBEBEB",
+        padding: "36px 32px",
+        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         cursor: "default",
-        transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: hovered ? "0 8px 32px rgba(0,0,0,0.10)" : "0 2px 16px rgba(0,0,0,0.06)",
+        transform: hovered ? "translateY(-6px)" : "translateY(0)",
+        boxShadow: hovered ? "0 20px 40px rgba(107, 14, 8, 0.08)" : "0 4px 20px rgba(0,0,0,0.02)",
+        borderColor: hovered ? "rgba(107, 14, 8, 0.2)" : "#EBEBEB",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Top Border */}
+      {/* Subtly moving top accent line */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          height: 3,
-          background: "var(--brand)",
-          width: hovered ? "100%" : "0%",
-          transition: "width 0.4s ease-out",
-        }}
-      />
-      {/* Right Border */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: 3,
-          background: "var(--brand)",
-          height: hovered ? "100%" : "0%",
-          transition: "height 0.4s ease-out",
-        }}
-      />
-      {/* Bottom Border */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          height: 3,
-          background: "var(--brand)",
-          width: hovered ? "100%" : "0%",
-          transition: "width 0.4s ease-out",
-        }}
-      />
-      {/* Left Border */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          width: 3,
-          background: "var(--brand)",
-          height: hovered ? "100%" : "0%",
-          transition: "height 0.4s ease-out",
+          height: 4,
+          background: "linear-gradient(90deg, #6B0E08, #A3231B)",
+          width: "100%",
+          transform: hovered ? "scaleX(1)" : "scaleX(0.15)",
+          transformOrigin: "left",
+          transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       />
 
       <div
         style={{
-          width: 48,
-          height: 48,
-          borderRadius: 12,
-          background: "rgba(107,14,8,0.07)",
+          width: 56,
+          height: 56,
+          borderRadius: 0,
+          background: hovered ? "rgba(107,14,8,0.12)" : "rgba(107,14,8,0.05)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: 20,
-          opacity: hovered ? 1 : 0.6,
-          transition: "opacity 0.3s ease-out",
+          marginBottom: 24,
+          transform: hovered ? "scale(1.08)" : "scale(1)",
+          transition: "background-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
         {card.icon}
@@ -257,8 +228,8 @@ function DifCard({ card, index }: { card: typeof cards[0]; index: number }) {
       <h3
         style={{
           fontFamily: "var(--font-serif)",
-          fontSize: 20,
-          fontWeight: 500,
+          fontSize: 21,
+          fontWeight: 400,
           color: "#0D0D0D",
           marginBottom: 12,
           letterSpacing: "-0.01em",

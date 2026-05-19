@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Noto_Serif, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ScrollToTop } from '@/components/scroll-to-top'
+import { LgpdConsent } from '@/components/lgpd-consent'
 import './globals.css'
 
 const notoserif = Noto_Serif({ 
@@ -79,6 +80,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <LgpdConsent />
         {children}
         <ScrollToTop />
         {process.env.NODE_ENV === 'production' && <Analytics />}

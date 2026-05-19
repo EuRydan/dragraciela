@@ -112,7 +112,7 @@ function TestimonialCard({ t, className = "" }: { t: typeof testimonials[0]; cla
         background: "#FFFFFF",
         border: "1px solid #EAEAEA",
         padding: "32px 28px",
-        borderRadius: 8,
+        borderRadius: 0,
         position: "relative",
         overflow: "hidden",
         boxShadow: "0 4px 20px rgba(0,0,0,0.03)",

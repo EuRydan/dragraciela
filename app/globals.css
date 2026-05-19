@@ -374,8 +374,8 @@
   }
 }
 
-*, *::before, *::after, body, a, button, input, select, textarea, [role="button"] {
-  cursor: unset !important;
+a, button, [role="button"], select {
+  cursor: pointer;
 }
 
 /* ─── CTA FINAL FULL-BLEED SPLIT LAYOUT ─── */
@@ -709,3 +709,30 @@
     align-items: flex-end !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   LGPD COOKIE CONSENT CUSTOM STYLES
+   ══════════════════════════════════════════════════════════════════════ */
+#cc-main .cm {
+  font-family: 'Inter', sans-serif;
+  border-radius: 16px;
+}
+#cc-main .cm__title {
+  font-family: 'Playfair Display', serif;
+  color: #0D0D0D;
+}
+#cc-main .cm__btn[data-role="necessary"] {
+  background: transparent;
+  border: 1.5px solid #6B0E08;
+  color: #6B0E08;
+  border-radius: 999px;
+}
+#cc-main .cm__btn[data-role="all"] {
+  background: #6B0E08;
+  color: white;
+  border-radius: 999px;
+}
+#cc-main .cm__btn:hover {
+  opacity: 0.88;
+}
+

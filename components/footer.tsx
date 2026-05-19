@@ -228,6 +228,29 @@ export function Footer() {
         >
           © 2026 Dra. Graciela Criminalista. Todos os direitos reservados.
         </p>
+        <a
+          href="#"
+          data-cc="show-preferencesModal"
+          style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: 12,
+            color: "rgba(255,255,255,0.35)",
+            textDecoration: "none",
+            transition: "color 0.2s ease",
+            minHeight: 24,
+            display: "inline-flex",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "rgba(255,255,255,0.7)"
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "rgba(255,255,255,0.35)"
+          }}
+        >
+          Política de Cookies
+        </a>
         <p
           style={{
             fontFamily: "var(--font-sans)",

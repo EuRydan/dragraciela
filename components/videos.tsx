@@ -86,7 +86,7 @@ export function Videos() {
               style={{
                 background: "#FAFAFA",
                 border: "1px solid #EBEBEB",
-                borderRadius: 16,
+                borderRadius: 0,
                 overflow: "hidden",
                 boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
                 borderTop: "3px solid #6B0E08",

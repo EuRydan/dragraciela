@@ -1,3 +1,7 @@
+"use client"
+
+import { useRef, useEffect, useState } from "react"
+
 const steps = [
   {
     num: "01",
@@ -20,6 +24,56 @@ const steps = [
     desc: "Presença em todas as audiências e fases do processo, com informação constante e transparente.",
   },
 ]
+
+function AnimatedNumber({ target, duration = 800 }: { target: number; duration?: number }) {
+  const [current, setCurrent] = useState(0)
+  const elementRef = useRef<HTMLSpanElement>(null)
+  const [hasAnimated, setHasAnimated] = useState(false)
+
+  useEffect(() => {
+    if (hasAnimated) return
+
+    const element = elementRef.current
+    if (!element) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasAnimated(true)
+          
+          const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          if (prefersReducedMotion) {
+            setCurrent(target)
+            return
+          }
+
+          const startTime = performance.now()
+          const animate = (now: number) => {
+            const elapsed = now - startTime
+            const progress = Math.min(elapsed / duration, 1)
+            const eased = 1 - Math.pow(1 - progress, 3) 
+            const val = Math.round(eased * target)
+            setCurrent(val)
+            if (progress < 1) {
+              requestAnimationFrame(animate)
+            }
+          }
+          requestAnimationFrame(animate)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [target, duration, hasAnimated])
+
+  return (
+    <span ref={elementRef}>
+      {String(current).padStart(2, "0")}
+    </span>
+  )
+}
 
 export function ComoAtuo() {
   return (
@@ -63,7 +117,7 @@ export function ComoAtuo() {
                   userSelect: "none",
                 }}
               >
-                {step.num}
+                <AnimatedNumber target={parseInt(step.num, 10)} />
               </div>
 
               <h3

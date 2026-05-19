@@ -1,6 +1,9 @@
 "use client"
 
+import { useState } from "react"
+
 export function Sobre() {
+  const [isHovered, setIsHovered] = useState(false)
   return (
     <section
       id="sobre"
@@ -12,7 +15,7 @@ export function Sobre() {
         paddingBottom: 96 
       }}
     >
-      {/* Parallax Background */}
+      {/* Background Video */}
       <div
         aria-hidden="true"
         style={{
@@ -21,15 +24,30 @@ export function Sobre() {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundImage: "url('/1_equLDecnc_xdFeh8WkZHrQ1-1200x800.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          overflow: "hidden",
           opacity: 0.15,
           zIndex: 0,
           pointerEvents: "none",
         }}
-      />
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <source src="/video.mp4" type="video/mp4" />
+        </video>
+      </div>
 
       <div className="section-inner" style={{ position: "relative", zIndex: 1 }}>
         <div
@@ -42,7 +60,7 @@ export function Sobre() {
           }}
         >
           {/* Left Column */}
-          <div className="sobre-text-col" style={{ flex: "1 1 50%", minWidth: 320 }}>
+          <div className={`sobre-text-col ${isHovered ? "hovered" : ""}`} style={{ flex: "1 1 50%", minWidth: 320 }}>
             <span
               className="fade-up"
               style={{
@@ -132,105 +150,132 @@ export function Sobre() {
             </div>
           </div>
 
-          {/* Right Column — Slide-left interaction (pure CSS, no clipping) */}
-          <div className="sobre-image-container fade-up delay-4" style={{ cursor: "pointer" }}>
-            <style dangerouslySetInnerHTML={{ __html: `
-              .sobre-image-container {
-                position: relative !important;
-                overflow: visible !important; /* Allow the sliding image to be fully visible side-by-side */
-                height: 420px;
-                flex: 1 1 35%;
-                min-width: 320px;
-                width: 100%;
-              }
-              
-              .sobre-text-col {
-                transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important;
-                transform: translateX(0);
-              }
-              
-              .sobre-img-bottom {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100% !important;
-                object-fit: cover;
-                object-position: center top;
-                border-radius: 16px;
-                z-index: 1;
-                box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-                transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.6s ease;
-                transform: translateX(0);
-              }
-              
-              .sobre-img-top {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100% !important;
-                object-fit: cover;
-                object-position: center top;
-                border-radius: 16px;
-                z-index: 2;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-                transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.6s ease;
-                transform: translateX(0);
-              }
-
-              /* Desktop hover: ONLY top image slides right. Bottom image stays perfectly static so it never covers text. */
-              @media (min-width: 1024px) {
-                .sobre-image-container:hover .sobre-img-top {
-                  transform: translateX(calc(100% + 24px)) !important;
-                  box-shadow: 12px 16px 40px rgba(0,0,0,0.25) !important;
+          {/* Right Column Wrapper (Static, holds the hover state) */}
+          <div
+            className="sobre-image-wrapper fade-up delay-4"
+            style={{
+              flex: "1 1 35%",
+              minWidth: 320,
+              position: "relative",
+              cursor: "pointer",
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {/* Right Column — Slide-left interaction */}
+            <div className={`sobre-image-container ${isHovered ? "hovered" : ""}`}>
+              <style dangerouslySetInnerHTML={{ __html: `
+                .sobre-image-wrapper {
+                  height: 420px;
                 }
-              }
-
-              /* Tablet hover: slide slightly down & scale to avoid breaking narrow margins */
-              @media (min-width: 768px) and (max-width: 1023px) {
-                .sobre-image-container:hover .sobre-img-top {
-                  transform: translateY(40px) scale(0.95) !important;
-                  box-shadow: 0 16px 40px rgba(0,0,0,0.2) !important;
-                }
-              }
-
-              /* Mobile viewport adjustments to guarantee absolute responsiveness and zero bleeding */
-              @media (max-width: 767px) {
+                
                 .sobre-image-container {
-                  height: 320px !important;
-                  min-width: 0 !important;
-                  width: 100% !important;
-                  overflow: hidden !important; /* Bulletproof containment on mobile screen sizes */
-                  border-radius: 16px;
+                  position: relative !important;
+                  overflow: visible !important; /* Allow the sliding image to be fully visible side-by-side */
+                  height: 100%;
+                  width: 100%;
+                  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important;
                 }
-                .sobre-img-bottom, .sobre-img-top {
-                  height: 320px !important;
+                
+                .sobre-text-col {
+                  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important;
+                  transform: translateX(0);
                 }
-                .sobre-image-container:hover .sobre-img-top {
-                  transform: scale(0.98) !important;
-                  box-shadow: 0 12px 32px rgba(0,0,0,0.18) !important;
+                
+                .sobre-img-bottom {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100% !important;
+                  object-fit: cover;
+                  object-position: center top;
+                  border-radius: 0;
+                  z-index: 1;
+                  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+                  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.6s ease;
+                  transform: translateX(0);
                 }
-              }
-            `}} />
+                
+                .sobre-img-top {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100% !important;
+                  object-fit: cover;
+                  object-position: center top;
+                  border-radius: 0;
+                  z-index: 2;
+                  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+                  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.6s ease;
+                  transform: translateX(0);
+                }
 
-            {/* Card 2 — OAB (bottom, always still) */}
-            <img
-              src="/69f6bfadc332b.jpg"
-              alt="Dra. Graciela Maciel segurando carteira da OAB"
-              loading="lazy"
-              className="sobre-img-bottom"
-              style={{ height: "100%" }}
-            />
+                /* Desktop hover: Left column slides left, container shifts left slightly, and top image slides right. */
+                @media (min-width: 1024px) {
+                  .sobre-text-col.hovered {
+                    transform: translateX(-100px) !important;
+                  }
+                  .sobre-image-container.hovered {
+                    transform: translateX(-50px) !important;
+                  }
+                  .sobre-image-container.hovered .sobre-img-top {
+                    transform: translateX(calc(100% + 24px)) !important;
+                    box-shadow: 12px 16px 40px rgba(0,0,0,0.25) !important;
+                  }
+                }
 
-            {/* Card 1 — Red Blazer (top, slides left on hover) */}
-            <img
-              src="/69f6bfe280aba.jpg"
-              alt="Dra. Graciela Maciel, advogada criminalista no Rio de Janeiro"
-              loading="lazy"
-              className="sobre-img-top"
-              style={{ height: "100%" }}
-            />
+                /* Tablet hover: slide slightly down & scale to avoid breaking narrow margins */
+                @media (min-width: 768px) and (max-width: 1023px) {
+                  .sobre-image-container.hovered .sobre-img-top {
+                    transform: translateY(40px) scale(0.95) !important;
+                    box-shadow: 0 16px 40px rgba(0,0,0,0.2) !important;
+                  }
+                }
+
+                /* Mobile viewport adjustments to guarantee absolute responsiveness and zero bleeding */
+                @media (max-width: 767px) {
+                  .sobre-image-wrapper {
+                    height: 320px !important;
+                    min-width: 0 !important;
+                    width: 100% !important;
+                  }
+                  .sobre-image-container {
+                    height: 320px !important;
+                    min-width: 0 !important;
+                    width: 100% !important;
+                    overflow: hidden !important; /* Bulletproof containment on mobile screen sizes */
+                    border-radius: 0;
+                  }
+                  .sobre-img-bottom, .sobre-img-top {
+                    height: 320px !important;
+                  }
+                  .sobre-image-container.hovered .sobre-img-top {
+                    transform: scale(0.98) !important;
+                    box-shadow: 0 12px 32px rgba(0,0,0,0.18) !important;
+                  }
+                }
+              `}} />
+
+              {/* Card 2 — OAB (bottom, always still) */}
+              <img
+                src="/69f6bfadc332b.jpg"
+                alt="Dra. Graciela Maciel segurando carteira da OAB"
+                loading="lazy"
+                className="sobre-img-bottom"
+                style={{ height: "100%" }}
+              />
+
+              {/* Card 1 — Red Blazer (top, slides left on hover) */}
+              <img
+                src="/69f6bfe280aba.jpg"
+                alt="Dra. Graciela Maciel, advogada criminalista no Rio de Janeiro"
+                loading="lazy"
+                className="sobre-img-top"
+                style={{ height: "100%" }}
+              />
+            </div>
           </div>
         </div>
       </div>
