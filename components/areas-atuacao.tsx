@@ -189,47 +189,119 @@ function AreaRow({ area, index }: { area: typeof areas[0]; index: number }) {
 }
 
 export function AreasAtuacao() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section
       id="atuacao"
-      className="section"
-      style={{ background: "#6B0E08", paddingTop: 96, paddingBottom: 96 }}
+      ref={sectionRef}
+      className={`section ${isVisible ? "is-visible" : ""}`}
+      style={{
+        position: "relative",
+        paddingTop: 96,
+        paddingBottom: 96,
+        overflow: "hidden",
+      }}
     >
-      <div className="section-inner">
-        {/* Header */}
-        <div style={{ marginBottom: 56 }}>
-          <h2 className="section-title fade-up delay-1" style={{ color: "#FFFFFF" }}>
-            Áreas de Atuação
-          </h2>
-          <div className="title-divider fade-up delay-2" style={{ background: "#FFFFFF", marginBottom: 16 }} />
-          <p
-            className="fade-up delay-2"
+      <style dangerouslySetInnerHTML={{ __html: `
+        #atuacao {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        @keyframes fundoMovimentoAtuacao {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        #atuacao::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(45deg, #6B0E08, #3a0000, #000000, #141414, #6B0E08);
+          background-size: 400% 400%;
+          animation: fundoMovimentoAtuacao 15s ease infinite;
+          z-index: 1;
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        #atuacao.is-visible::before {
+          transform: scaleX(1);
+        }
+        
+        .atuacao-content-wrap {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s, 
+                      transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+        
+        #atuacao.is-visible .atuacao-content-wrap {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}} />
+
+      <div className="atuacao-content-wrap">
+        <div className="section-inner">
+          {/* Header */}
+          <div style={{ marginBottom: 56 }}>
+            <h2 className="section-title fade-up delay-1" style={{ color: "#FFFFFF" }}>
+              Áreas de Atuação
+            </h2>
+            <div className="title-divider fade-up delay-2" style={{ background: "#FFFFFF", marginBottom: 16 }} />
+            <p
+              className="fade-up delay-2"
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: "#FFFFFF",
+                opacity: 0.75,
+                maxWidth: 540,
+              }}
+            >
+              Cada caso é único. Atuamos com precisão em todas as frentes<br />
+              do direito criminal.
+            </p>
+          </div>
+
+          {/* 2-column grid — 1 column on mobile */}
+          <div
+            className="areas-grid"
             style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: 16,
-              lineHeight: 1.7,
-              color: "#FFFFFF",
-              opacity: 0.75,
-              maxWidth: 540,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "0 40px",
             }}
           >
-            Cada caso é único. Atuamos com precisão em todas as frentes<br />
-            do direito criminal.
-          </p>
-        </div>
-
-        {/* 2-column grid — 1 column on mobile */}
-        <div
-          className="areas-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "0 40px",
-          }}
-        >
-          {areas.map((area, i) => (
-            <AreaRow key={area.title} area={area} index={i} />
-          ))}
+            {areas.map((area, i) => (
+              <AreaRow key={area.title} area={area} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
