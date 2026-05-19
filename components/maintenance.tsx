@@ -177,10 +177,6 @@ export function Maintenance() {
           </div>
         </div>
 
-        <div className="badge-comunicado-sharp">
-          <AlertTriangle size={12} strokeWidth={2.5} />
-          Comunicado do Sistema
-        </div>
 
         <h1 className="maintenance-title-sharp">
           Acesso Indisponível
