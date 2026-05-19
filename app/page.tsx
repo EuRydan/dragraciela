@@ -16,7 +16,7 @@ import { Footer } from "@/components/footer"
 import { Maintenance } from "@/components/maintenance"
 
 // Altere para false para reabrir o site
-const MAINTENANCE_MODE = true
+const MAINTENANCE_MODE = false
 
 export default function Home() {
   useScrollFadeUp()

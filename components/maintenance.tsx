@@ -49,7 +49,7 @@ export function Maintenance() {
         .bg-motion-gradient-full {
           position: absolute;
           inset: 0;
-          background: linear-gradient(-45deg, #000000, #3a0000, #6B0E08, #141414, #fc6060ff);
+          background: linear-gradient(-45deg, #000000, #3a0000, #ffffff, #141414, #fc6060ff);
           background-size: 400% 400%;
           animation: fundoMovimentoCompleto 15s ease infinite;
           opacity: 0.85;
@@ -100,7 +100,7 @@ export function Maintenance() {
           gap: 8px;
           padding: 6px 16px;
           background: rgba(107, 14, 8, 0.25);
-          border: 1.5px solid #6B0E08;
+          border: 1.5px solid #ffffff;
           border-radius: 0px; /* STRICT SHARP DESIGN SYSTEM */
           color: #FC6060;
           font-size: 11px;
@@ -123,7 +123,7 @@ export function Maintenance() {
         .title-divider-sharp {
           width: 40px;
           height: 2px;
-          background: #6B0E08;
+          background: #ffffff;
           margin: 0 auto 24px auto;
           border-radius: 0px;
         }
@@ -169,7 +169,7 @@ export function Maintenance() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "1.5px solid #6B0E08",
+              border: "1.5px solid #ffffff",
               borderRadius: "0px",
             }}
           >
