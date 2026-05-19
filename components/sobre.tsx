@@ -1,98 +1,9 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 
 export function Sobre() {
   const [isHovered, setIsHovered] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const video = videoRef.current
-    const section = document.getElementById("sobre")
-    if (!video || !section) return
-
-    video.pause()
-
-    let isIntersecting = false
-    let targetTime = 0
-    let currentTime = 0
-    let rafId: number
-
-    const updateVideoProgress = () => {
-      if (!isIntersecting || !video.duration) {
-        rafId = requestAnimationFrame(updateVideoProgress)
-        return
-      }
-
-      // Smoothly interpolate (lerp) the video currentTime towards targetTime
-      const diff = targetTime - currentTime
-      if (Math.abs(diff) > 0.01) {
-        currentTime += diff * 0.12 // Lerp speed factor
-        video.currentTime = Math.max(0, Math.min(video.duration - 0.02, currentTime))
-      }
-
-      rafId = requestAnimationFrame(updateVideoProgress)
-    }
-
-    const handleScroll = () => {
-      if (!isIntersecting || !video.duration) return
-
-      const rect = section.getBoundingClientRect()
-      const viewHeight = window.innerHeight
-
-      // Calculate how far the section has scrolled through the viewport
-      // Progress goes from 0 (starts entering from bottom) to 1 (completely exits at top)
-      const progress = (viewHeight - rect.top) / (viewHeight + rect.height)
-      const boundedProgress = Math.max(0, Math.min(1, progress))
-
-      // Map progress to video duration
-      targetTime = boundedProgress * video.duration
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isIntersecting = entry.isIntersecting
-        if (isIntersecting && video.duration) {
-          const rect = section.getBoundingClientRect()
-          const viewHeight = window.innerHeight
-          const progress = (viewHeight - rect.top) / (viewHeight + rect.height)
-          const boundedProgress = Math.max(0, Math.min(1, progress))
-          targetTime = boundedProgress * video.duration
-          currentTime = targetTime
-          video.currentTime = targetTime
-        }
-      },
-      { threshold: 0.01 }
-    )
-
-    const onMetadataLoaded = () => {
-      const rect = section.getBoundingClientRect()
-      const viewHeight = window.innerHeight
-      const progress = (viewHeight - rect.top) / (viewHeight + rect.height)
-      const boundedProgress = Math.max(0, Math.min(1, progress))
-      targetTime = boundedProgress * video.duration
-      currentTime = targetTime
-      video.currentTime = targetTime
-    }
-
-    if (video.readyState >= 1) {
-      onMetadataLoaded()
-    } else {
-      video.addEventListener("loadedmetadata", onMetadataLoaded)
-    }
-
-    observer.observe(section)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    rafId = requestAnimationFrame(updateVideoProgress)
-
-    return () => {
-      observer.disconnect()
-      window.removeEventListener("scroll", handleScroll)
-      video.removeEventListener("loadedmetadata", onMetadataLoaded)
-      cancelAnimationFrame(rafId)
-    }
-  }, [])
-
   return (
     <section
       id="sobre"
@@ -120,8 +31,8 @@ export function Sobre() {
         }}
       >
         <video
-          ref={videoRef}
-          preload="auto"
+          autoPlay
+          loop
           muted
           playsInline
           style={{
