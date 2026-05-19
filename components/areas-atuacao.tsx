@@ -226,19 +226,11 @@ export function AreasAtuacao() {
           overflow: hidden;
         }
         
-        @keyframes fundoMovimentoAtuacao {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
         #atuacao::before {
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(45deg, #6B0E08, #3a0000, #000000, #141414, #6B0E08);
-          background-size: 400% 400%;
-          animation: fundoMovimentoAtuacao 15s ease infinite;
+          background: #6B0E08;
           z-index: 1;
           transform: scaleX(0);
           transform-origin: right;
