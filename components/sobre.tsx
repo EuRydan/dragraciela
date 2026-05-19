@@ -1,9 +1,58 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export function Sobre() {
   const [isHovered, setIsHovered] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.pause()
+
+    let scrollTimeout: any
+    let isScrolling = false
+    let isIntersecting = false
+
+    const handleScroll = () => {
+      if (!isIntersecting || !video) return
+
+      if (!isScrolling) {
+        isScrolling = true
+        video.play().catch(() => {
+          // Handle automatic browser restrictions or interruptions gracefully
+        })
+      }
+
+      clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false
+        video.pause()
+      }, 150)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting
+        if (!isIntersecting) {
+          video.pause()
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(video)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("scroll", handleScroll)
+      clearTimeout(scrollTimeout)
+    }
+  }, [])
+
   return (
     <section
       id="sobre"
@@ -31,7 +80,7 @@ export function Sobre() {
         }}
       >
         <video
-          autoPlay
+          ref={videoRef}
           loop
           muted
           playsInline
