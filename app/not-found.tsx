@@ -2,20 +2,19 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Home, FileQuestion } from "lucide-react"
+import { ArrowLeft, Home as HomeIcon, FileQuestion } from "lucide-react"
 
 export default function NotFound() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    // Disable scrolling when error view is active
+    // Disable scrolling when page is active
     document.documentElement.style.overflow = "hidden"
     document.body.style.overflow = "hidden"
     
     requestAnimationFrame(() => setLoaded(true))
 
     return () => {
-      // Restore scrolling on unmount
       document.documentElement.style.overflow = ""
       document.body.style.overflow = ""
     }
@@ -32,63 +31,18 @@ export default function NotFound() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#000000",
-        color: "#FFFFFF",
+        backgroundColor: "#FFFFFF",
+        color: "#0D0D0D",
         fontFamily: "var(--font-sans), system-ui, -apple-system, sans-serif",
         overflow: "hidden",
         padding: "24px",
       }}
     >
-      {/* CSS STYLES FOR THE ANIMATED GRADIENT & ELEMENTS (SHARP DESIGN SYSTEM) */}
+      {/* CSS STYLES (SHARP DESIGN SYSTEM, CLEAN WHITE THEME) */}
       <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes fundoMovimento404 {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        .bg-motion-gradient-404 {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(-45deg, #000000, #141414, #4A0906, #0D0D0D, #6B0E08);
-          background-size: 400% 400%;
-          animation: fundoMovimento404 12s ease infinite;
-          opacity: 0.9;
-          z-index: 0;
-        }
-
-        .vignette-overlay-404 {
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(circle at center, transparent 10%, rgba(0, 0, 0, 0.95) 100%);
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .grid-overlay-404 {
-          position: absolute;
-          inset: 0;
-          background-image: 
-            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-          background-size: 40px 40px;
-          background-position: center;
-          mask-image: radial-gradient(circle at center, white 20%, transparent 80%);
-          -webkit-mask-image: radial-gradient(circle at center, white 20%, transparent 80%);
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .error-card-sharp {
-          background: rgba(13, 13, 13, 0.85);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 
-            0 24px 64px rgba(0, 0, 0, 0.9),
-            0 0 80px rgba(107, 14, 8, 0.15);
-          border-radius: 0px; /* STRICT SHARP DESIGN SYSTEM */
+        .content-wrapper-sharp {
           max-width: 480px;
           width: 100%;
-          padding: 48px 36px;
           text-align: center;
           position: relative;
           z-index: 10;
@@ -100,10 +54,10 @@ export default function NotFound() {
           align-items: center;
           gap: 6px;
           padding: 5px 14px;
-          background: rgba(107, 14, 8, 0.3);
+          background: rgba(107, 14, 8, 0.05);
           border: 1px solid #6B0E08;
           border-radius: 0px;
-          color: #FC6060;
+          color: #6B0E08;
           font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.15em;
@@ -117,7 +71,7 @@ export default function NotFound() {
           font-weight: 400;
           line-height: 1.3;
           letter-spacing: -0.01em;
-          color: #FFFFFF;
+          color: #0D0D0D;
           margin-bottom: 16px;
         }
 
@@ -131,7 +85,7 @@ export default function NotFound() {
         .error-message-sharp {
           font-size: 14px;
           line-height: 1.6;
-          color: rgba(255, 255, 255, 0.75);
+          color: #6B6B6B;
           margin-bottom: 32px;
         }
 
@@ -155,7 +109,7 @@ export default function NotFound() {
           border-radius: 0px;
           text-decoration: none;
           border: none;
-          box-shadow: 0 2px 8px rgba(107, 14, 8, 0.2);
+          box-shadow: 0 2px 8px rgba(107, 14, 8, 0.15);
           transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
           cursor: pointer;
           min-height: 44px;
@@ -164,7 +118,7 @@ export default function NotFound() {
         .btn-error-primary:hover {
           background: #4A0906;
           transform: translateY(-1px);
-          box-shadow: 0 6px 18px rgba(107, 14, 8, 0.3);
+          box-shadow: 0 6px 18px rgba(107, 14, 8, 0.25);
         }
 
         .btn-error-secondary {
@@ -173,44 +127,29 @@ export default function NotFound() {
           justify-content: center;
           gap: 8px;
           background: transparent;
-          color: #FFFFFF;
+          color: #0D0D0D;
           font-family: var(--font-sans), sans-serif;
           font-size: 14px;
           font-weight: 500;
           padding: 13px 24px;
           border-radius: 0px;
           text-decoration: none;
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          border: 1px solid rgba(0, 0, 0, 0.2);
           transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
           cursor: pointer;
           min-height: 44px;
         }
 
         .btn-error-secondary:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: #FFFFFF;
+          background: rgba(0, 0, 0, 0.04);
+          border-color: #000000;
           transform: translateY(-1px);
-        }
-
-        .error-footer-sharp {
-          margin-top: 32px;
-          font-size: 10px;
-          color: rgba(255, 255, 255, 0.3);
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          padding-top: 20px;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
         }
       `}} />
 
-      {/* FULL SCREEN BACKGROUND */}
-      <div className="bg-motion-gradient-404" />
-      <div className="vignette-overlay-404" />
-      <div className="grid-overlay-404" />
-      
-      {/* SHARP CARD */}
+      {/* SHARP CONTENT (NO CARD SHAPE/BOX) */}
       <main
-        className="error-card-sharp"
+        className="content-wrapper-sharp"
         style={{
           opacity: loaded ? 1 : 0,
           transform: loaded ? "translateY(0) scale(1)" : "translateY(20px) scale(0.98)",
@@ -229,7 +168,7 @@ export default function NotFound() {
               borderRadius: "0px",
             }}
           >
-            <FileQuestion size={22} color="#FC6060" strokeWidth={1.5} />
+            <FileQuestion size={22} color="#6B0E08" strokeWidth={1.5} />
           </div>
         </div>
 
@@ -249,7 +188,7 @@ export default function NotFound() {
 
         <div className="error-buttons-sharp">
           <Link href="/" className="btn-error-primary">
-            <Home size={15} strokeWidth={2} />
+            <HomeIcon size={15} strokeWidth={2} />
             Voltar ao Início
           </Link>
           
@@ -261,10 +200,6 @@ export default function NotFound() {
             Retornar à Página Anterior
           </button>
         </div>
-
-        <footer className="error-footer-sharp">
-          Dra. Graciela Maciel &bull; Advocacia Criminal
-        </footer>
       </main>
     </div>
   )
