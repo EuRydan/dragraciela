@@ -13,17 +13,9 @@ import { Videos } from "@/components/videos"
 import { Depoimentos } from "@/components/depoimentos"
 import { CTAFinal } from "@/components/cta-final"
 import { Footer } from "@/components/footer"
-import { Maintenance } from "@/components/maintenance"
-
-// Altere para false para reabrir o site
-const MAINTENANCE_MODE = false
 
 export default function Home() {
   useScrollFadeUp()
-
-  if (MAINTENANCE_MODE) {
-    return <Maintenance />
-  }
 
   return (
     <>
@@ -44,3 +36,4 @@ export default function Home() {
     </>
   )
 }
+
